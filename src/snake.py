@@ -12,14 +12,18 @@ def choose_move(data):
     # Positive weights are more desirable; negative less
     weights = [[0 for x in range(data['board']['width'])] for y in range(data['board']['height'])]
     snakes = data['board']['snakes']
-    
+    food = data['board']['food']
+    head = data['you']['body'][0]
+    tail = data['you']['body'][-1]
     # Weight snake bodies as very underisable suntanning spots
     weights = weight_snakes(weights, snakes)
 
+    # DEBUG Print Statement
     for row in weights:
         print(row)
 
-    direction = find_path(data['board'], weights)
+    # CURRENTLY PATHS TO ANY FOOD
+    direction = find_path(data['board'], weights, head, food)
     return direction
 
 """
