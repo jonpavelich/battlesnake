@@ -29,7 +29,9 @@ def find_path(board, weights, startPos, endPos):
     start = cart_to_abs(s_x, s_y, width)
     end = cart_to_abs(e_x, e_y, width)
     path = a_star(graph, start, end, width)
+    pretty_path = [abs_to_cart(x, width) for x in path]
 
+    print(f"path is {pretty_path}")
     print(f"we will move from {abs_to_cart(path[-1], width)} to {abs_to_cart(path[-2], width)}")
     pt = abs_to_cart(path[-2], width)
     x = pt[0]
@@ -91,7 +93,7 @@ def graphify(weights, width, height):
 Perform A* search to find an optimal path from start to goal on graph
 """
 def a_star(graph, start, goal, width):
-    print(f"pathfinding from {start} to {goal}")
+    print(f"pathfinding from {abs_to_cart(start, width)} to {abs_to_cart(goal, width)}")
 
     closed_set = set()              # set of already evaluated nodes
     open_set_q = PriorityQueue()      # set of discovered nodes yet to be evaluated
