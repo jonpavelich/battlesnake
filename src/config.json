@@ -1,7 +1,7 @@
 {
-    "color": "#8C271E",
-    "headType": "bendr",
-    "tailType": "pixel",
+    "color": "#CA3C25",
+    "headType": "sand-worm",
+    "tailType": "bolt",
     "weights": {
         "body": 100,
         "biggerHead": -10,
