@@ -15,8 +15,12 @@ def choose_move(data):
     food = data['board']['food']
     head = data['you']['body'][0]
     tail = data['you']['body'][-1]
+    length = len(data['you']['body'])
+    health = data['you']['health']
+    myId = data['you']['id']
     # Weight snake bodies as very underisable suntanning spots
     weights = weight_snakes(weights, snakes)
+    weights = weight_heads(weights, snakes, length, myId)
 
     # DEBUG Print Statement
     for row in weights:
@@ -33,6 +37,28 @@ def weight_snakes(weights, snakes):
     for snake in snakes:
         for coord in snake['body'][:-1]:
             weights[coord['x']][coord['y']] += -100
+    return weights
+
+"""
+Negatively weight the area around a snake's head
+"""
+def weight_heads(weights, snakes, length, myId):
+    for snake in snakes:
+        if snake['id'] != myId:
+            x = snake['body'][0]['x']
+            y = snake['body'][0]['y']
+            #If it's bigger than or equal to us, reduce desirability
+            weight = -10 if len(snake['body']) >= length else 10
+            #All surrounding directions seem like a bad place to be
+            if weights[x][y+1] != None:
+                weights[x][y+1] += weight
+            if weights[x][y-1] != None:
+                weights[x][y-1] += weight
+            if weights[x+1][y] != None:
+                weights[x+1][y] += weight
+            if weights[x-1][y] != None:
+                weights[x-1][y] += weight
+            print(weights)
     return weights
 
 """
