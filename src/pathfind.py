@@ -152,4 +152,4 @@ def reconstruct_path(came_from, current):
     return total_path
 
 
-find_path({'height': 3, 'width': 3}, [[0, 0, 0], [-10, 0, 0], [0, 0, 0]], {'x': 0, 'y': 0}, [{'x': 2, 'y': 2}, {'x': 2, 'y': 1}])
+# find_path({'height': 3, 'width': 3}, [[0, 0, 0], [-10, 0, 0], [0, 0, 0]], {'x': 0, 'y': 0}, [{'x': 2, 'y': 2}, {'x': 2, 'y': 1}])
