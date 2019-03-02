@@ -4,6 +4,9 @@
     "tailType": "pixel",
     "weights": {
         "body": 100,
-        "head": 10
-    }
+        "biggerHead": -10,
+        "smallerHead": 10
+    },
+    "desiredLength": 10,
+    "desiredHealth": 60
 }

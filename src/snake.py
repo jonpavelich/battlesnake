@@ -1,6 +1,7 @@
 from util import get_config
 from pathfind import find_path
 import json
+import random
 
 config = get_config()
 
@@ -24,12 +25,22 @@ def choose_move(data):
     weights = weight_snakes(weights, snakes)
     weights = weight_heads(weights, snakes, length, myId, width, height)
 
+    # DECIDE WHAT THE SNAKE DOES
+    if length < config['desiredLength']:
+        targets = food
+    elif health < config['desiredHealth']:
+        targets = food
+    else:
+        targets = [tail,]
+
     # DEBUG Print Statement
     for row in weights:
         print(row)
 
-    # CURRENTLY PATHS TO ANY FOOD
-    direction = find_path(data['board'], weights, head, food)
+   
+
+    #direction = find_path(data['board'], weights, head, food)
+    
     return direction
 
 """
@@ -50,9 +61,17 @@ def weight_heads(weights, snakes, length, myId, width, height):
         if snake['id'] != myId:
             x = snake['body'][0]['x']
             y = snake['body'][0]['y']
-            #If it's bigger than or equal to us, reduce desirability
-            headWeight = config['weights']['head']
-            weight = -headWeight if len(snake['body']) >= length else headWeight
+            # If it's bigger than or equal to us, try to stay away from it
+            # If it's smaller than us, don't do that
+            biggerHead = config['weights']['biggerHead']
+            smallerHead = config['weights']['smallerHead']
+            if len(snake['body']) >= length:
+                weight = biggerHead
+            else: 
+                weight = smallerHead
+
+            print("What the hell")
+            print(weight)
             #All surrounding directions seem like a bad place to be
             if weights[x][y+1] != None:
                 if is_inbounds(height, width, x, y+1):
@@ -70,7 +89,6 @@ def weight_heads(weights, snakes, length, myId, width, height):
 
 def is_inbounds(height, width, x, y):
     if x < 0 or x >= width or y < 0 or y >= height:
-        print(x)
         return 0
     else: 
         return 1
