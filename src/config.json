@@ -1,5 +1,9 @@
 {
     "color": "#8C271E",
     "headType": "bendr",
-    "tailType": "pixel"
+    "tailType": "pixel",
+    "weights": {
+        "body": 100,
+        "head": 10
+    }
 }

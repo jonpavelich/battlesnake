@@ -18,9 +18,11 @@ def choose_move(data):
     length = len(data['you']['body'])
     health = data['you']['health']
     myId = data['you']['id']
+    width = data['board']['width']
+    height = data['board']['height']
     # Weight snake bodies as very underisable suntanning spots
     weights = weight_snakes(weights, snakes)
-    weights = weight_heads(weights, snakes, length, myId)
+    weights = weight_heads(weights, snakes, length, myId, width, height)
 
     # DEBUG Print Statement
     for row in weights:
@@ -40,26 +42,38 @@ def weight_snakes(weights, snakes):
     return weights
 
 """
-Negatively weight the area around a snake's head
+Negatively weight the area around a snake's head 
+Bigger snakes = lower weight
 """
-def weight_heads(weights, snakes, length, myId):
+def weight_heads(weights, snakes, length, myId, width, height):
     for snake in snakes:
         if snake['id'] != myId:
             x = snake['body'][0]['x']
             y = snake['body'][0]['y']
             #If it's bigger than or equal to us, reduce desirability
-            weight = -10 if len(snake['body']) >= length else 10
+            headWeight = config['weights']['head']
+            weight = -headWeight if len(snake['body']) >= length else headWeight
             #All surrounding directions seem like a bad place to be
             if weights[x][y+1] != None:
-                weights[x][y+1] += weight
+                if is_inbounds(height, width, x, y+1):
+                    weights[x][y+1] += weight
             if weights[x][y-1] != None:
-                weights[x][y-1] += weight
+                if is_inbounds(height, width, x, y-1):
+                    weights[x][y-1] += weight
             if weights[x+1][y] != None:
-                weights[x+1][y] += weight
+                if is_inbounds(height, width, x+1, y):
+                    weights[x+1][y] += weight
             if weights[x-1][y] != None:
-                weights[x-1][y] += weight
-            print(weights)
+                if is_inbounds(height, width, x-1, y):
+                    weights[x-1][y] += weight
     return weights
+
+def is_inbounds(height, width, x, y):
+    if x < 0 or x >= width or y < 0 or y >= height:
+        print(x)
+        return 0
+    else: 
+        return 1
 
 """
 Sample Data:
