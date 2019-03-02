@@ -39,7 +39,7 @@ def choose_move(data):
 
    
 
-    #direction = find_path(data['board'], weights, head, food)
+    direction = find_path(data['board'], weights, head, food)
     
     return direction
 
