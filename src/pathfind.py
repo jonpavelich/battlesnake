@@ -42,11 +42,11 @@ def find_path(board, weights, startPos, endPos):
         print("Moving right")
         return "right"
     if y < s_y:
-        print("Moving down")
-        return "down"
-    if y > s_y:
         print("Moving up")
         return "up"
+    if y > s_y:
+        print("Moving down")
+        return "down"
     
     print("ERROR: Path doesn't correspond to a valid move!")
     directions = ['up', 'down', 'left', 'right']
