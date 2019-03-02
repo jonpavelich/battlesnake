@@ -30,7 +30,7 @@ def find_path(board, weights, startPos, endPos):
     end = cart_to_abs(e_x, e_y, width)
     path = a_star(graph, start, end, width)
 
-    print(f"we will move from {path[-1]} to {path[-2]}")
+    print(f"we will move from {abs_to_cart(path[-1], width)} to {abs_to_cart(path[-2], width)}")
     pt = abs_to_cart(path[-2], width)
     x = pt[0]
     y = pt[1]
