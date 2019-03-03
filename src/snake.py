@@ -26,14 +26,14 @@ def choose_move(data):
     weights = weight_heads(weights, snakes, length, myId, width, height)
     
     weights[head['x']][head['y']] = 0
-
+    
+    targets = [tail,]
     # DECIDE WHAT THE SNAKE DOES
     if length < config['desiredLength']:
         targets = food
     elif health < config['desiredHealth']:
         targets = food
-    else:
-        targets = [tail,]
+
 
     # DEBUG Print Statement
     for row in weights:
