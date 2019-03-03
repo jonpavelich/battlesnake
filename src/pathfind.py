@@ -110,6 +110,7 @@ def a_star(graph, start, goal, width):
     
     while not open_set_q.empty():
         current = open_set_q.get()
+        current = current[1]
         open_set.remove(current)
         # print(f"  current is {current}")
         if current == goal:
