@@ -86,7 +86,7 @@ def graphify(weights, width, height):
             for i,j in [(x+1,y), (x-1, y), (x, y-1), (x, y+1)]:
                 if i >= 0 and i < width and j >= 0 and j < height:
                     neighbors.add(cart_to_abs(i, j, width))
-            graph[cart_to_abs(x, y, width)] = (weights[x][y], neighbors)
+            graph[cart_to_abs(x, y, width)] = (weights[y][x], neighbors)
     return graph
 
 """
