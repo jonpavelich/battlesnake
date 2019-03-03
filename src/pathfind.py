@@ -135,11 +135,11 @@ def a_star(graph, start, goal, width):
             
             tentative_gscore = gscore[current] + dist_between(current, neighbor, width) - graph[neighbor][0]
 
-            if neighbor not in open_set:
-                open_set.add(neighbor)
-                open_set_q.put(neighbor)
-            elif tentative_gscore >= gscore[neighbor]:
+            if tentative_gscore >= gscore[neighbor]:
                 continue
+            # elif neighbor not in open_set:
+            #     open_set.add(neighbor)
+            #     open_set_q.put(neighbor)
             
             came_from[neighbor] = current
             gscore[neighbor] = tentative_gscore
