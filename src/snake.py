@@ -49,7 +49,7 @@ Negatively weight the snakes so we don't step on their tail
 def weight_snakes(weights, snakes):
     for snake in snakes:
         for coord in snake['body'][:-1]:
-            weights[coord['x']][coord['y']] += -100
+            weights[coord['x']][coord['y']] += -10000
     return weights
 
 """
