@@ -26,7 +26,7 @@ def choose_move(data):
     weights = weight_heads(weights, snakes, length, myId, width, height)
     
     weights[head['x']][head['y']] = 0
-    
+    targets = []    
     # DECIDE WHAT THE SNAKE DOES
     if length < config['desiredLength']:
         targets = food
