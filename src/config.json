@@ -4,7 +4,7 @@
     "tailType": "bolt",
     "weights": {
         "body": 100,
-        "biggerHead": -10,
+        "biggerHead": -20,
         "smallerHead": 10
     },
     "desiredLength": 10,
