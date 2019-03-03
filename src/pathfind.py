@@ -96,10 +96,6 @@ def a_star(graph, start, goal, width):
     print(f"pathfinding from {abs_to_cart(start, width)} to {abs_to_cart(goal, width)}")
 
     closed_set = set()              # set of already evaluated nodes
-    open_set_q = PriorityQueue()      # set of discovered nodes yet to be evaluated
-    open_set_q.put(start)
-    open_set = set()
-    open_set.add(start)
     came_from = {}                  # for each node, which node it can most efficiently be reached from
     gscore = {}                     # for each node, the cost of getting from the start node to that node
     for i in range(len(graph)):
@@ -107,6 +103,10 @@ def a_star(graph, start, goal, width):
     gscore[start] = 0
     fscore = {}                     # For each node, the total cost of getting from the start node to the goal by passing by that node
     fscore[start] = heuristic_cost_estimate(start, goal, width)
+    open_set_q = PriorityQueue()      # set of discovered nodes yet to be evaluated
+    open_set_q.put((fscore[start], start))
+    open_set = set()
+    open_set.add(start)
     
     while not open_set_q.empty():
         current = open_set_q.get()
@@ -137,13 +137,13 @@ def a_star(graph, start, goal, width):
 
             if tentative_gscore >= gscore[neighbor]:
                 continue
-            # elif neighbor not in open_set:
-            #     open_set.add(neighbor)
-            #     open_set_q.put(neighbor)
             
             came_from[neighbor] = current
             gscore[neighbor] = tentative_gscore
             fscore[neighbor] = gscore[neighbor] + heuristic_cost_estimate(neighbor, goal, width)
+            if neighbor not in open_set:
+                open_set.add(neighbor)
+                open_set_q.put((fscore[neighbor], neighbor))
 
 def heuristic_cost_estimate(neighbor, goal, width):
     neighbor_pt = abs_to_cart(neighbor, width)
