@@ -75,16 +75,16 @@ def weight_heads(weights, snakes, length, myId, width, height):
             print("What the hell")
             print(weight)
             #All surrounding directions seem like a bad place to be
-            if weights[x][y+1] != None:
+            if len(weights) > x and len(weights[x]) > y+1 and weights[x][y+1] != None:
                 if is_inbounds(height, width, x, y+1):
                     weights[x][y+1] += weight
-            if weights[x][y-1] != None:
+            if len(weights) > x and len(weights[x]) > y-1 and weights[x][y-1] != None:
                 if is_inbounds(height, width, x, y-1):
                     weights[x][y-1] += weight
-            if weights[x+1][y] != None:
+            if len(weights) > x+1 and len(weights[x]) > y and weights[x+1][y] != None:
                 if is_inbounds(height, width, x+1, y):
                     weights[x+1][y] += weight
-            if weights[x-1][y] != None:
+            if len(weights) > x-1 and len(weights[x]) > y and weights[x-1][y] != None:
                 if is_inbounds(height, width, x-1, y):
                     weights[x-1][y] += weight
     return weights
