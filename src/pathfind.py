@@ -133,7 +133,7 @@ def a_star(graph, start, goal, width):
             if neighbor in closed_set:
                 continue
             
-            tentative_gscore = gscore[current] + dist_between(current, neighbor, width) - graph[current][0]
+            tentative_gscore = gscore[current] + dist_between(current, neighbor, width) - graph[neighbor][0]
 
             if neighbor not in open_set:
                 open_set.add(neighbor)
