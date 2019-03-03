@@ -1,5 +1,6 @@
 import random
 from queue import PriorityQueue
+import logging
 
 """
 Board is the entire board object.
@@ -12,8 +13,7 @@ def find_path(board, weights, startPos, endPos):
     height = board['height']
 
     graph = graphify(weights, width, height)
-    # print(graph)
-
+    
     s_x = startPos['x']
     s_y = startPos['y']
     mindist = 100000
@@ -24,33 +24,33 @@ def find_path(board, weights, startPos, endPos):
             end = e
     e_x = end['x']
     e_y = end['y']
-    print(f"selected target {e_x}, {e_y}")
+    logging.info(f"selected target {e_x}, {e_y}")
 
     start = cart_to_abs(s_x, s_y, width)
     end = cart_to_abs(e_x, e_y, width)
     path = a_star(graph, start, end, width)
     pretty_path = [abs_to_cart(x, width) for x in path]
 
-    print(f"path is {pretty_path}")
-    print(f"we will move from {abs_to_cart(path[-1], width)} to {abs_to_cart(path[-2], width)}")
+    logging.debug(f"path is {pretty_path}")
+    logging.info(f"we will move from {abs_to_cart(path[-1], width)} to {abs_to_cart(path[-2], width)}")
     pt = abs_to_cart(path[-2], width)
     x = pt[0]
     y = pt[1]
 
     if x < s_x:
-        print("Moving left")
+        logging.info("Moving left")
         return "left"
     if x > s_x:
-        print("Moving right")
+        logging.info("Moving right")
         return "right"
     if y < s_y:
-        print("Moving up")
+        logging.info("Moving up")
         return "up"
     if y > s_y:
-        print("Moving down")
+        logging.info("Moving down")
         return "down"
     
-    print("ERROR: Path doesn't correspond to a valid move!")
+    logging.error("Path doesn't correspond to a valid move!")
     directions = ['up', 'down', 'left', 'right']
     return random.choice(directions)
 
@@ -93,7 +93,7 @@ def graphify(weights, width, height):
 Perform A* search to find an optimal path from start to goal on graph
 """
 def a_star(graph, start, goal, width):
-    print(f"pathfinding from {abs_to_cart(start, width)} to {abs_to_cart(goal, width)}")
+    logging.debug(f"pathfinding from {abs_to_cart(start, width)} to {abs_to_cart(goal, width)}")
 
     closed_set = set()              # set of already evaluated nodes
     came_from = {}                  # for each node, which node it can most efficiently be reached from
@@ -112,25 +112,17 @@ def a_star(graph, start, goal, width):
         current = open_set_q.get()
         current = current[1]
         open_set.remove(current)
-        # print(f"  current is {current}")
+        logging.debug(f"  current is {current}")
         if current == goal:
-            # print("REACHED GOAL")
-            print("=== gscore ===")
-            gscores = {}
-            for key in gscore:
-                gscores[abs_to_cart(key, width)] = gscore[key]
-            print(gscores)
-            print("=== fscore ===")
-            fscores = {}
-            for key in fscore:
-                fscores[abs_to_cart(key, width)] = fscore[key]
-            print(fscores)
+            logging.info("Pathfinding reached goal")
+            logging.debug(f"gscores: {gscore}")
+            logging.debug(f"fscores: {fscore}")
             return reconstruct_path(came_from, current)
         
         closed_set.add(current)
 
         for neighbor in graph[current][1]:
-            # print(f"    check neighbour {neighbor}")
+            logging.debug(f"    check neighbour {neighbor}")
             if neighbor in closed_set:
                 continue
             
@@ -161,8 +153,5 @@ def reconstruct_path(came_from, current):
     while current in came_from:
         current = came_from[current]
         total_path.append(current)
-    print(total_path)
+    logging.debug(f"path is {total_path}")
     return total_path
-
-
-# find_path({'height': 3, 'width': 3}, [[0, 0, 0], [-10, 0, 0], [0, 0, 0]], {'x': 0, 'y': 0}, [{'x': 2, 'y': 2}, {'x': 2, 'y': 1}])

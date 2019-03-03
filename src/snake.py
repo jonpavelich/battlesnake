@@ -2,6 +2,7 @@ from util import get_config
 from pathfind import find_path
 import json
 import random
+import logging
 
 config = get_config()
 
@@ -21,7 +22,7 @@ def choose_move(data):
     myId = data['you']['id']
     width = data['board']['width']
     height = data['board']['height']
-    # Weight snake bodies as very underisable suntanning spots
+    # Weight snake bodies as very undesirable suntanning spots
     weights = weight_snakes(weights, snakes)
     weights = weight_heads(weights, snakes, length, myId, width, height)
     
@@ -35,9 +36,7 @@ def choose_move(data):
     if len(targets) == 0:
         targets = [tail,]
 
-    # DEBUG Print Statement
-    for row in weights:
-        print(row)
+    logging.debug('\n'.join(weights))
 
    
 
@@ -72,8 +71,8 @@ def weight_heads(weights, snakes, length, myId, width, height):
             else: 
                 weight = smallerHead
 
-            print("What the hell")
-            print(weight)
+            logging.debug("What the hell")
+            logging.debug(weight)
             #All surrounding directions seem like a bad place to be
             if len(weights) > x and len(weights[x]) > y+1 and weights[x][y+1] != None:
                 if is_inbounds(height, width, x, y+1):
