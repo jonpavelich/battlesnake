@@ -115,9 +115,15 @@ def a_star(graph, start, goal, width):
         if current == goal:
             # print("REACHED GOAL")
             print("=== gscore ===")
-            print(gscore)
+            gscores = {}
+            for key in gscore:
+                gscores[abs_to_cart(key, width)] = gscore[key]
+            print(gscores)
             print("=== fscore ===")
-            print(fscore)
+            fscores = {}
+            for key in fscore:
+                fscores[abs_to_cart(key, width)] = fscore[key]
+            print(fscores)
             return reconstruct_path(came_from, current)
         
         closed_set.add(current)
