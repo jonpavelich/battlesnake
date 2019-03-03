@@ -24,6 +24,8 @@ def choose_move(data):
     # Weight snake bodies as very underisable suntanning spots
     weights = weight_snakes(weights, snakes)
     weights = weight_heads(weights, snakes, length, myId, width, height)
+    
+    weights[head['x']][head['y']] = 0
 
     # DECIDE WHAT THE SNAKE DOES
     if length < config['desiredLength']:
