@@ -1,4 +1,4 @@
-# Battlesnake
+# BattleSnake
 A [BattleSnake](https://battlesnake.io) AI written during the 2019 contest.
 
 ## Team
@@ -6,7 +6,7 @@ Jon Pavelich ([GitLab](https://gitlab.com/jonpavelich), [GitHub](https://github.
 Tyler Harnadek ([GitLab](https://gitlab.com/tharnadek), [GitHub](https://gitlab.com/tharnadek))
 
 ## Overview
-This snake is based on the [Python 3 Starter Snake](https://github.com/jonpavelich/battlesnake-python3-starter) we also developed during the 2019 contest (under a different license). It uses Flask and Gunicorn to serve requests, and GitLab CI to deploy to Heroku.
+This snake is based on the [Python 3 Starter Snake](https://github.com/jonpavelich/battlesnake-python3-starter) we also developed during the 2019 contest (the starter snake is available under a more permissive license). It uses Flask and Gunicorn to serve requests, and GitLab CI to deploy to Heroku.
 
 ### Strategy
 #### Targeting
