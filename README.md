@@ -19,7 +19,7 @@ The board is weighted according to how favourable (positive weighting) or danger
 Pathfinding is done using A*. The board weighting of each tile is subtracted from G(n) (cost to travel from start to n), which discourages negative weighted tiles (by increasing the cost to reach them) and encourages positive tiles (by decreasing the cost to reach them). The heuristic function simply computes Manhattan distance to guide the search. This finds an path which attempts to pass through positively weighted tiles near our path and avoids negatively weighted tiles.
 
 ### Issues
-For a list of bugs and improvements which are needed for future contests, see [ISSUES.md](ISSUES.md).
+For a list of bugs and improvements which are needed for future contests, see the [Issue Tracker](https://gitlab.com/jonpavelich/battlesnake/issues).
 
 ### License
 This code is available under the GNU Affero General Public License v3.0. See [LICENSE.md](LICENSE.md).
