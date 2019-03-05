@@ -36,7 +36,7 @@ def choose_move(data):
     if len(targets) == 0:
         targets = [tail,]
 
-    logging.debug('\n'.join(weights))
+    logging.debug('\n'.join([str(x) for x in weights]))
 
    
 
